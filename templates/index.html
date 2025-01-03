@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00bcd4;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00bcd4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0097a7;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            color: #00bcd4;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Animation styles */
+        .fadeIn {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Text Summarizer</h1>
+    <div class="form-group">
+        <textarea id="inputText" placeholder="Enter the text to summarize..." rows="8"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="number" id="maxLength" placeholder="Enter max length for the summary" />
+    </div>
+    <button onclick="getSummary()">Summarize</button>
+    <div id="summaryResult" class="result fadeIn"></div>
+</div>
+
+<script>
+    async function getSummary() {
+        const text = document.getElementById("inputText").value;
+        const maxLength = document.getElementById("maxLength").value;
+        
+        if (!text || !maxLength) {
+            alert("Please provide both the text and max length.");
+            return;
+        }
+        
+        try {
+            const response = await fetch("/summarize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `text=${encodeURIComponent(text)}&max_length=${encodeURIComponent(maxLength)}`
+            });
+            
+            const data = await response.json();
+            
+            // Display the summary
+            const summaryElement = document.getElementById("summaryResult");
+            summaryElement.textContent = "Summary: " + data.summary;
+        } catch (error) {
+            console.error("Error summarizing text:", error);
+            alert("An error occurred while summarizing the text.");
+        }
+    }
+</script>
+
+</body>
+</html>
