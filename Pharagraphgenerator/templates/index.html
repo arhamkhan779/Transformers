@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraphrase Generator</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #121212;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        textarea {
+            width: 80%;
+            max-width: 700px;
+            height: 150px;
+            background: #1e1e2f;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        textarea:focus {
+            outline: none;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .generate {
+            background: #ff6b6b;
+            color: #fff;
+        }
+
+        .generate:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+        }
+
+        .clear {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        .clear:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+        }
+
+        .output-container {
+            display: none;
+            margin-top: 20px;
+            max-width: 700px;
+            width: 80%;
+            background: #1e1e2f;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .output p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ffeb3b;
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Paraphrase Generator</h1>
+    <textarea id="inputText" placeholder="Enter text to paraphrase..."></textarea><br>
+    <button class="generate" onclick="generate()">Generate</button>
+    <button class="clear" onclick="clearText()">Clear</button>
+    <div id="outputContainer" class="output-container">
+        <h2>Generated Paraphrases:</h2>
+        <div id="output"></div>
+    </div>
+    <script>
+        async function generate() {
+            const inputText = document.getElementById('inputText').value.trim();
+            if (!inputText) {
+                alert('Please enter text!');
+                return;
+            }
+
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: inputText })
+            });
+            const data = await response.json();
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            if (data.paraphrases && data.paraphrases.length) {
+                data.paraphrases.forEach(phrase => {
+                    const p = document.createElement('p');
+                    p.textContent = phrase;
+                    outputDiv.appendChild(p);
+                });
+            }
+            document.getElementById('outputContainer').style.display = 'block';
+        }
+
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
