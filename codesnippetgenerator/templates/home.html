@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Based API for Python Code Snippet Generation</title>
+    <title>Welcome to Code Snippet Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            animation: fadeInDown 1.5s ease;
+        }
+        p {
+            font-size: 1.5rem;
+            animation: fadeInUp 2s ease;
+        }
+        .contact {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        .button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: #121212;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            animation: bounceIn 2.5s ease;
+        }
+        .button:hover {
+            background-color: #ffa726;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes bounceIn {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>LLM Based API for Python Code Snippet Generation</h1>
+    <div class="container">
+        <h1>Welcome to Code Snippet Generator</h1>
+        <p>Powered by Arham Khan</p>
+        <p class="contact">Email: ak06598909@gmail.com | Phone: +923003020167</p>
+        <a href="/main" class="button">Get Started</a>
+    </div>
 </body>
 </html>
