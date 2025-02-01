@@ -1,1 +1,86 @@
-#Hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Translator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #f3f3f3;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #ff7b72;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            animation: buttonFadeIn 1.5s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #e86555;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes buttonFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to Language Translator</h1>
+    <a href="/main" class="button">Get Started</a>
+</div>
+
+<div class="footer">
+    <p>Powered by Arham Khan | Email: <a href="mailto:Arhamkhn134@gmail.com">Arhamkhn134@gmail.com</a></p>
+</div>
+
+</body>
+</html>
